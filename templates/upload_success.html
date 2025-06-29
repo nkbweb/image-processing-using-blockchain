@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block title %}Upload Success | AES Image Vault{% endblock %}
+{% block content %}
+<div class="row justify-content-center">
+  <div class="col-md-7 col-lg-6">
+    <div class="card p-4 text-center">
+      <h2 class="mb-3 text-success">Upload Successful!</h2>
+      <div class="alert alert-success">Your image has been encrypted and uploaded.</div>
+      <div class="mb-3">
+        <label class="form-label">AES Decryption Key (save this!):</label>
+        <input type="text" class="form-control text-center" value="{{ key }}" readonly>
+        <small class="text-danger">This key will not be shown again. Save it to decrypt your image.</small>
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Shareable Link:</label>
+        <input type="text" class="form-control text-center" value="{{ link }}" readonly>
+      </div>
+      <a href="{{ url_for('my_uploads') }}" class="btn btn-primary">My Uploads</a>
+      <a href="{{ url_for('upload') }}" class="btn btn-outline-secondary">Upload Another</a>
+    </div>
+  </div>
+</div>
+{% endblock %} 

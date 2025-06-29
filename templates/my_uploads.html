@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% block title %}My Uploads | AES Image Vault{% endblock %}
+{% block content %}
+<div class="row justify-content-center">
+  <div class="col-lg-10">
+    <div class="card p-4">
+      <h2 class="mb-3">My Uploads</h2>
+      <a href="{{ url_for('upload') }}" class="btn btn-primary mb-3">Upload New Image</a>
+      {% with messages = get_flashed_messages() %}
+        {% if messages %}
+          <div class="alert alert-info">{{ messages[0] }}</div>
+        {% endif %}
+      {% endwith %}
+      <div class="table-responsive">
+        <table class="table table-bordered table-hover align-middle">
+          <thead class="table-light">
+            <tr>
+              <th>File Name</th>
+              <th>Upload Date</th>
+              <th>Description</th>
+              <th>Shareable Link</th>
+              <th>Delete</th>
+            </tr>
+          </thead>
+          <tbody>
+          {% for img in images %}
+            <tr>
+              <td>{{ img.filename }}</td>
+              <td>{{ img.uploaded_at.strftime('%Y-%m-%d %H:%M') }}</td>
+              <td>{{ img.description or '' }}</td>
+              <td><a href="{{ url_for('decrypt', uuid=img.uuid, _external=True) }}" target="_blank" class="badge bg-info text-dark">Link</a></td>
+              <td>
+                <form method="post" action="{{ url_for('delete_upload', uuid=img.uuid) }}" onsubmit="return confirm('Delete this upload?');">
+                  <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                </form>
+              </td>
+            </tr>
+          {% endfor %}
+          </tbody>
+        </table>
+      </div>
+      <a href="{{ url_for('logout') }}" class="btn btn-outline-danger">Logout</a>
+    </div>
+  </div>
+</div>
+{% endblock %} 

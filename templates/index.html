@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% block title %}Home | AES Image Vault{% endblock %}
+{% block content %}
+<div class="row justify-content-center">
+  <div class="col-md-8 col-lg-6">
+    <div class="card p-4 text-center">
+      <h1 class="mb-3">Welcome to <span class="text-primary">AES Image Vault</span></h1>
+      <p class="lead mb-4">Securely encrypt, store, and share your images with AES-256 encryption.</p>
+      {% if current_user.is_authenticated %}
+        <a href="{{ url_for('upload') }}" class="btn btn-primary btn-lg mb-2">Upload Image</a>
+        <a href="{{ url_for('my_uploads') }}" class="btn btn-outline-secondary btn-lg mb-2">My Uploads</a>
+        <a href="{{ url_for('logout') }}" class="btn btn-outline-danger btn-lg">Logout</a>
+      {% else %}
+        <a href="{{ url_for('login') }}" class="btn btn-primary btn-lg mb-2">Login</a>
+        <a href="{{ url_for('signup') }}" class="btn btn-success btn-lg">Sign Up</a>
+      {% endif %}
+    </div>
+  </div>
+</div>
+{% endblock %} 

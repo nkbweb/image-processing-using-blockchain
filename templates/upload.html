@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block title %}Upload Image | AES Image Vault{% endblock %}
+{% block content %}
+<div class="row justify-content-center">
+  <div class="col-md-7 col-lg-6">
+    <div class="card p-4">
+      <h2 class="mb-3">Upload Image</h2>
+      <form method="post" enctype="multipart/form-data">
+        <div class="mb-3">
+          <label for="file" class="form-label">Select Image</label>
+          <input type="file" class="form-control" id="file" name="file" accept="image/*" required>
+        </div>
+        <div class="mb-3">
+          <label for="description" class="form-label">Description (optional)</label>
+          <input type="text" class="form-control" id="description" name="description">
+        </div>
+        <button type="submit" class="btn btn-primary w-100">Upload</button>
+        <a href="{{ url_for('my_uploads') }}" class="btn btn-link w-100">My Uploads</a>
+      </form>
+      {% with messages = get_flashed_messages() %}
+        {% if messages %}
+          <div class="alert alert-warning mt-3">{{ messages[0] }}</div>
+        {% endif %}
+      {% endwith %}
+    </div>
+  </div>
+</div>
+{% endblock %} 
